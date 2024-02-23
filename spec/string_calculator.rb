@@ -22,16 +22,23 @@ RSpec.describe '#add' do
     it 'returns the sum of the numbers when input contains new line' do
       expect(add("1\n2,3")).to eq(6)
     end
+
+    it 'should support different delimiters' do
+      expect(add("//;\n1;2")).to eq(3)
+      expect(add("//:\n5:6")).to eq(11)
+      expect(add("//*\n3*4")).to eq(7)
+    end
   end
 
   it 'should raise error when input is not valid' do
     expect { add("1,\n") }.to raise_error(ArgumentError)
+    expect { add("\n,4") }.to raise_error(ArgumentError)
   end
 end
 
 # String Calculator method
 def add(str)
-  raise ArgumentError if str.match(/,\n/)
+  raise ArgumentError if str.match(/\n,|,\n/)
   return 0 if str.empty?
 
   str.split(/[,\n]/).inject(0) { |sum, num| sum + num.to_i }
