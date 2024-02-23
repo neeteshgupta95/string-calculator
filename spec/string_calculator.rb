@@ -26,7 +26,8 @@ end
 
 # String Calculator method
 def add(str)
+  raise ArgumentError if str.match(/,\n/)
   return 0 if str.empty?
 
-  str.split(',').inject(0) { |sum, num| sum + num.to_i }
+  str.split(/[,\n]/).inject(0) { |sum, num| sum + num.to_i }
 end
