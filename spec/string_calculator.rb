@@ -18,4 +18,6 @@ end
 # String Calculator method
 def add(str)
   return 0 if str.empty?
+
+  str.split(',').inject(0) { |sum, num| sum + num.to_i }
 end
