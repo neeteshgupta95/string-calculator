@@ -47,6 +47,13 @@ end
 # String Calculator method
 def add(str)
   raise ArgumentError if str.match(/\n,|,\n/)
+
+  negative_ary = str.scan(/-\d+/)
+
+  unless negative_ary.empty?
+    raise ArgumentError, "negative numbers not allowed #{negative_ary.join(' ')}"
+  end
+
   return 0 if str.empty?
 
   delimiter = ','
