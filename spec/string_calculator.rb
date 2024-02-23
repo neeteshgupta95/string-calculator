@@ -30,9 +30,17 @@ RSpec.describe '#add' do
     end
   end
 
-  it 'should raise error when input is not valid' do
-    expect { add("1,\n") }.to raise_error(ArgumentError)
-    expect { add("\n,4") }.to raise_error(ArgumentError)
+  context 'should raise error when input string is not valid' do
+    it 'should raise error when input contains new line' do
+      expect { add("1,\n") }.to raise_error(ArgumentError)
+      expect { add("\n,4") }.to raise_error(ArgumentError)
+    end
+
+    it 'returns error when input contains negative number' do
+      expect { add('-1') }.to raise_error(ArgumentError, 'negative numbers not allowed -1')
+      expect { add('1,-4') }.to raise_error(ArgumentError, 'negative numbers not allowed -4')
+      expect { add('-1,-22,-3') }.to raise_error(ArgumentError, 'negative numbers not allowed -1 -22 -3')
+    end
   end
 end
 
