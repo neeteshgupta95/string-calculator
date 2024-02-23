@@ -41,5 +41,8 @@ def add(str)
   raise ArgumentError if str.match(/\n,|,\n/)
   return 0 if str.empty?
 
-  str.split(/[,\n]/).inject(0) { |sum, num| sum + num.to_i }
+  delimiter = ','
+  delimiter, str = [str[2], str[4..-1]] if str.start_with?('//')
+
+  str.split(/[,\n#{delimiter}]/).inject(0) { |sum, num| sum + num.to_i }
 end
