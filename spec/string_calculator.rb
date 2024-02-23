@@ -9,9 +9,13 @@ RSpec.describe '#add' do
     expect(add('5')).to eq(5)
   end
 
-  it 'returns the sum of two' do
+  it 'returns the sum of two numbers' do
     expect(add('1,5')).to eq(6)
     expect(add('2,3')).to eq(5)
+  end
+
+  it 'returns the sum of multiple numbers' do
+    expect(add('3,2,1,5,6')).to eq(17)
   end
 end
 
